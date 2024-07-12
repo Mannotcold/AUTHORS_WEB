@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SearchPaper</title>
+
+    <!-- custom css link -->
+    <link rel="stylesheet" href="/stylesheets/stylehome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body class="light-theme">
+
+    <!-- HEADER -->
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="flex-wrapper">
+                    <ul class="desktop-nav">
+                        <li>
+                            <a href="/adminhome" class="nav-link">Home</a>
+                        </li>
+                        <li>
+                            <a href="/adminhome/Register" class="nav-link">Create User</a>
+                        </li>
+                        <li>
+                            <a href="#home" class="nav-link" id="home">About</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                    <a href="/Login" class="button1">
+                        <h1>Login</h1>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <div>
+            <section id="hero">
+                <div class="container">
+                    <div class="searchwrapper">
+                        <div class="searchbox">
+                            <div class="row column4">
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control search-input"
+                                        placeholder="Search by Keywords...">
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control category">
+                                        <option value="">Category</option>
+                                        <option value="title">title</option>
+                                        <option value="abstract">abstract</option>
+                                        <option value="author_string_list">author_string_list</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-primary btn-search">Search</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div>
+            <div class="table-wrapper">
+                <div class="title">
+                    <h1>List Paper</h1>
+                    <div>
+                        <h1>
+
+                        </h1>
+                    </div>
+                </div>
+                <table id="paperTable" class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>paper_id</th>
+                            <th>title</th>
+                            <th>author_string_list</th>
+                            <th>abstract</th>
+                            <th>conference_id</th>
+                            <th>topic_id</th>
+                            <th>user_id</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% listPaper.forEach(function(paper) { %>
+                            <tr>
+                                <td>
+                                    <%= paper.paper_id %>
+                                </td>
+                                <td>
+                                    <%= paper.title %>
+                                </td>
+                                <td>
+                                    <%= paper.author_string_list %>
+                                </td>
+                                <td>
+                                    <%= paper.abstract %>
+                                </td>
+                                <td>
+                                    <%= paper.conference_id %>
+                                </td>
+                                <td>
+                                    <%= paper.topic_id %>
+                                </td>
+                                <td>
+                                    <%= paper.user_id %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <div class="pagination-container">
+                    <button id="previous" class="btn btn-primary">Previous</button>
+                    <span>Page <span id="currentPage">1</span></span>
+                    <button id="next" class="btn btn-primary">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Script to handle the click event -->
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#home", function () {
+                alert("tác động vào dom");
+            });
+
+            $('.btn-search').on('click', function () {
+                var keyword = $('.search-input').val(); // Lấy từ khoá tìm kiếm từ input
+                var category = $('.category').val(); // Lấy giá trị category từ dropdown
+                $.ajax({
+                    url: '/search',
+                    method: 'GET',
+                    data: { keyword: keyword, category: category },
+                    success: function (data) {
+                        $('#paperTable tbody').html(data); // Cập nhật lại nội dung bảng kết quả
+                        $('#currentPage').text(1); // Đặt lại trang hiện tại về 1 sau khi tìm kiếm
+                        updatePaginationButtons(1); // Cập nhật nút phân trang
+                    },
+                    error: function (err) {
+                        console.error('Error searching papers:', err);
+                    }
+                });
+            });
+
+            var itemsPerPage = 10; // Số lượng mục trên mỗi trang
+            var currentPage = 1; // Trang hiện tại
+            var totalPages = 0; // Tổng số trang
+
+            // Hàm cập nhật nút phân trang
+            function updatePaginationButtons(current) {
+                $('#previous').prop('disabled', current === 1); // Vô hiệu hóa nút Previous nếu đang ở trang đầu
+                $('#next').prop('disabled', current === totalPages); // Vô hiệu hóa nút Next nếu đang ở trang cuối
+            }
+
+            // Hàm cập nhật dữ liệu phân trang
+            function updatePagination() {
+                var startIndex = (currentPage - 1) * itemsPerPage;
+                var endIndex = startIndex + itemsPerPage;
+                var currentItems = listPaper.slice(startIndex, endIndex);
+                renderTable(currentItems);
+                $('#currentPage').text(currentPage); // Hiển thị trang hiện tại
+                updatePaginationButtons(currentPage); // Cập nhật nút phân trang
+            }
+
+            // Hàm render bảng
+            function renderTable(data) {
+                var html = '';
+                data.forEach(function (paper) {
+                    html += '<tr>';
+                    html += '<td>' + paper.paper_id + '</td>';
+                    html += '<td>' + paper.title + '</td>';
+                    html += '<td>' + paper.author_string_list + '</td>';
+                    html += '<td>' + paper.abstract + '</td>';
+                    html += '<td>' + paper.conference_id + '</td>';
+                    html += '<td>' + paper.topic_id + '</td>';
+                    html += '<td>' + paper.user_id + '</td>';
+                    html += '</tr>';
+                });
+                $('#paperTable tbody').html(html);
+            }
+
+            // Sự kiện khi nhấn nút Previous
+            $('#previous').click(function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updatePagination();
+                }
+            });
+
+            // Sự kiện khi nhấn nút Next
+            $('#next').click(function () {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updatePagination();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
