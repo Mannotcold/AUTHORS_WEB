@@ -101,6 +101,7 @@
                             <th>conference_id</th>
                             <th>topic_id</th>
                             <th>user_id</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,6 +127,12 @@
                                 </td>
                                 <td>
                                     <%= paper.user_id %>
+                                </td>
+                                <td>
+                                    <a href="/AuthurHome/view_paper/<%= paper.paper_id %>" class="button1">
+                                        <button>View</button>
+                                    </a>
+                                
                                 </td>
                             </tr>
                             <% }); %>

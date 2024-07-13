@@ -15,6 +15,8 @@ var HomeRouter = require('./routes/Home');
 var LoginRouter = require('./routes/Login');
 // var RegisterRouter = require('./routes/AdminHome');
 var AdminHomeRouter = require('./routes/AdminHome');
+var AuthurHomeRouter = require('./routes/AuthurHome');
+
 var app = express();
 
 //config req.body
@@ -31,7 +33,7 @@ app.use(cookieParser());
 
 app.use('/', HomeRouter);
 app.use('/Login', LoginRouter);
-// app.use('/Register', RegisterRouter);
+app.use('/AuthurHome', AuthurHomeRouter);
 app.use('/AdminHome', AdminHomeRouter);
 app.use('/users', usersRouter);
 

@@ -3,6 +3,9 @@ const verifyToken = require('../Controller/verifyToken')
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456'; 
 
+const { getPaperbyID } = require('../services/userService')
+
+
 
 let handleLogin = async (req, res) => {
     let username = req.body.username;
@@ -71,6 +74,17 @@ let handleLogin = async (req, res) => {
     }
 }
 
+const getAuthurpage = async function (req, res, next) {
+    res.render('AuthurHome.ejs');
+}
+
+const getviewpaperpage = async function (req, res, next) {
+    const PaperId = req.params.id;
+    let paper = await getPaperbyID(PaperId);
+    console.log(paper);
+    res.render('DetailPaper.ejs', { paperview: paper });
+}
+
 module.exports = {
-    handleLogin
+    handleLogin, getAuthurpage, getviewpaperpage
 }

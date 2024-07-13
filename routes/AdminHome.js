@@ -4,7 +4,6 @@ const { getAdminpage, getRegisterpage, postRegisterpage, getedituserpage, postUp
 var router = express.Router();
 
 
-
 // /* GET register page. */
 router.get('/', getAdminpage);
 router.get('/Register', getRegisterpage);
