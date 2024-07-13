@@ -42,7 +42,7 @@
         </div>
     </header>
     <main>
-        <form id="addPaperForm" action="/AuthurHome/CreatePaper/add" method="post">
+        <form id="addPaperForm" action="/AuthurHome/CreatePaper/add" method="post" onsubmit="return validateForm()">
             <div class="form-wrapper">
                 <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
                 <div class="form-container">
@@ -107,6 +107,29 @@
             `;
             document.getElementById('authors').appendChild(authorDiv);
         });
+
+        function validateForm() {
+            const title = document.getElementById('title').value.trim();
+            const authorStringList = document.getElementById('author_string_list').value.trim();
+            const abstract = document.getElementById('abstract').value.trim();
+            const conferenceId = document.getElementById('conference_id').value.trim();
+            const topicId = document.getElementById('topic_id').value.trim();
+
+            if (title === "" || authorStringList === "" || abstract === "" || conferenceId === "" || topicId === "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            const authorIds = document.querySelectorAll('.author_id');
+            for (let i = 0; i < authorIds.length; i++) {
+                if (authorIds[i].value.trim() === "") {
+                    alert("Author ID must be filled out");
+                    return false;
+                }
+            }
+
+            return true;
+        }
     </script>
 </body>
 
