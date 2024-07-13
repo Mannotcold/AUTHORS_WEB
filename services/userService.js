@@ -21,7 +21,13 @@ const getPaperbyID = async (PaperId) => {
 
 }
 
+const updatePaperbyID = async (username, password, type, userID) => {
+    const [results, fields] = await connection.query(`UPDATE USERS SET taikhoan = ? , matkhau = ?, loaiTK = ? WHERE id = ?`, [username, password, type, userID]);
+    let user = results && results.length > 0 ? results[0] : {};
+    return user;
+}
+
 
 module.exports = {
-    handleUserLogin: handleUserLogin, getPaperbyID
+    handleUserLogin: handleUserLogin, getPaperbyID, updatePaperbyID
 }

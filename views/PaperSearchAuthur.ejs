@@ -31,12 +31,17 @@
                 <div class="flex-wrapper">
                     <ul class="desktop-nav">
                         <li>
-                            <a href="/" class="nav-link">Home</a>
+                            <a href="/adminhome" class="nav-link">Home</a>
                         </li>
                         <li>
-                            <a href="/SearchPaper" class="nav-link">Papers</a>
+                            <a href="/adminhome/Register" class="nav-link">Create User</a>
                         </li>
-                        
+                        <li>
+                            <a href="#home" class="nav-link" id="home">About</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
                     </ul>
                     <a href="/Login" class="button1">
                         <h1>Login</h1>
@@ -124,7 +129,7 @@
                                     <%= paper.user_id %>
                                 </td>
                                 <td>
-                                    <a href="/SearchPaper/view/<%= paper.paper_id %>" class="button1">
+                                    <a href="/AuthurHome/PaperSearchAuthur/SearchPaper/<%= paper.paper_id %>" class="button1">
                                         <button>View</button>
                                     </a>
                                 

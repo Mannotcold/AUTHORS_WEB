@@ -36,6 +36,12 @@
                     <td>
                         <%= paper.user_id %>
                     </td>
+                    <td>
+                        <a href="/SearchPaper/view/<%= paper.paper_id %>" class="button1">
+                            <button>View</button>
+                        </a>
+                    
+                    </td>
                 </tr>
                 <% }); %>
         </tbody>

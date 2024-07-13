@@ -60,7 +60,7 @@ const getAllUsers = async () => {
 
 const getUserbyID = async (userId) => {
     let [results, fields] = await connection.query(`select * from USERS u where user_id = ?`, [userId]);
-    
+    console.log()
     let user = results && results.length > 0 ? results[0] : {};
 
     return user;

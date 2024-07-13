@@ -11,6 +11,5 @@ router.post('/Register/Create_user', postRegisterpage);
 router.post('/edit_user/Update_user', postUpdatepage);
 router.post('/delete_user/:id', postDeletepage);
 router.get('/edit_user/:id', getedituserpage);
-
 // router.post('/Register/Create_user', getRegisterpage);
 module.exports = router;

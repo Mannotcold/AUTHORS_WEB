@@ -22,16 +22,10 @@
                 <div class="flex-wrapper">
                     <ul class="desktop-nav">
                         <li>
-                            <a href="/adminhome" class="nav-link">Home</a>
+                            <a href="/" class="nav-link">Home</a>
                         </li>
                         <li>
-                            <a href="/adminhome/Register" class="nav-link">Create User</a>
-                        </li>
-                        <li>
-                            <a href="#home" class="nav-link">About</a>
-                        </li>
-                        <li>
-                            <a href="#contact" class="nav-link">Contact</a>
+                            <a href="/SearchPaper" class="nav-link">Create User</a>
                         </li>
                     </ul>
                     <a href="/Login" class="button1">
@@ -42,8 +36,7 @@
         </div>
     </header>
     <main>
-        <%= JSON.stringify(paperview) %>
-            <form action="/view_user" method="post">
+            
                 <div class="form-wrapper">
                     <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
                     <div class="form-container">
@@ -78,13 +71,11 @@
                             <input type="text" value="<%= paperview[0].topic_id %>" name="topic_id" placeholder="topic_id"
                                 required>
                         </div>
-                        <button type="submit" class="submit-btn">Update</button>
                     </div>
                     <a href="/" class="icon-box">
                         <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
                     </a>
                 </div>
-            </form>
     </main>
 </body>
 
