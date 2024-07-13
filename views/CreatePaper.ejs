@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create paper</title>
+    <title>Add Paper</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -42,43 +42,48 @@
         </div>
     </header>
     <main>
-        <!-- /AuthurHome/PaperSearchAuthur/Update_Paper -->
-        <form action="/AuthurHome/PaperSearchAuthur/Update_Paper" method="post">
+        <form id="addPaperForm" action="/AuthurHome/CreatePaper/add" method="post">
             <div class="form-wrapper">
                 <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
                 <div class="form-container">
-                    <h2>View paper</h2>
-                    <div class="form-group d-none">
-                        <label for="name">ID:</label>
-                        <input type="text" value="" name="paper_id"
-                            placeholder="Enter your name" autocomplete="off">
-                    </div>
+                    <h2>Add Paper</h2>
                     <div class="form-group">
                         <label for="title">Title:</label>
-                        <input type="text" value="" name="title" placeholder="Enter your name"
+                        <input type="text" id="title" name="title" placeholder="Enter your title" required
+                            autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="author_string_list">Authors (comma separated):</label>
+                        <input type="text" id="author_string_list" name="author_string_list" placeholder="Enter authors"
                             required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="author_string_list">author_string_list:</label>
-                        <input type="text" value="" name="author_string_list"
-                            placeholder="author_string_list" required>
+                        <label for="abstract">Abstract:</label>
+                        <textarea id="abstract" name="abstract" placeholder="Enter abstract"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="abstract">abstract:</label>
-                        <input type="text" value="" name="abstract" placeholder="abstract"
-                            required>
+                        <label for="conference_id">Conference ID:</label>
+                        <input type="number" id="conference_id" name="conference_id" placeholder="Enter conference ID">
                     </div>
                     <div class="form-group">
-                        <label for="conference_id">conference_id:</label>
-                        <input type="text" value="" name="conference_id"
-                            placeholder="conference_id" required>
+                        <label for="topic_id">Topic ID:</label>
+                        <input type="number" id="topic_id" name="topic_id" placeholder="Enter topic ID">
                     </div>
-                    <div class="form-group">
-                        <label for="topic_id">topic_id:</label>
-                        <input type="text" value="" name="topic_id" placeholder="topic_id"
-                            required>
+                    <h3>Add Authors</h3>
+                    <div id="authors">
+                        <div class="form-group author">
+                            <label for="author_id">Author ID:</label>
+                            <input type="number" class="author_id" name="author_id[]" placeholder="Enter author ID"
+                                required><br>
+                            <label for="role">Role:</label>
+                            <select class="role" name="role[]" required>
+                                <option value="first_author">First Author</option>
+                                <option value="member">Member</option>
+                            </select><br>
+                        </div>
                     </div>
-                    <button type="submit" class="submit-btn">Update</button>
+                    <button type="button" id="addAuthorBtn" class="submit-btn">Add Another Author</button><br>
+                    <button type="submit" class="submit-btn">Submit</button>
                 </div>
                 <a href="/" class="icon-box">
                     <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
@@ -86,6 +91,23 @@
             </div>
         </form>
     </main>
+
+    <script>
+        document.getElementById('addAuthorBtn').addEventListener('click', function () {
+            const authorDiv = document.createElement('div');
+            authorDiv.classList.add('form-group', 'author');
+            authorDiv.innerHTML = `
+                <label for="author_id">Author ID:</label>
+                <input type="number" class="author_id" name="author_id[]" placeholder="Enter author ID" required><br>
+                <label for="role">Role:</label>
+                <select class="role" name="role[]" required>
+                    <option value="first_author">First Author</option>
+                    <option value="member">Member</option>
+                </select><br>
+            `;
+            document.getElementById('authors').appendChild(authorDiv);
+        });
+    </script>
 </body>
 
 </html>

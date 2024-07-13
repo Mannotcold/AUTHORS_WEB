@@ -142,6 +142,49 @@ const postUpdatepage = async function (req, res, next) {
     res.redirect(`/`)
 }
 
+
+const postaddPaper = async function (req, res, next) {
+    const { title, author_string_list, abstract, conference_id, topic_id } = req.body;
+    const authors = req.body.author_id;
+    const roles = req.body.role;
+    console.log(">>>req.body: ", title, author_string_list, abstract, conference_id, topic_id, authors, roles);
+
+    try {
+        // Bắt đầu một giao dịch
+        await connection.query('START TRANSACTION');
+
+        // Thêm bài báo vào bảng PAPERS
+        const [paperResult] = await connection.query(
+            'INSERT INTO PAPERS (title, author_string_list, abstract, conference_id, topic_id) VALUES (?, ?, ?, ?, ?)',
+            [title, author_string_list, abstract, conference_id, topic_id]
+        );
+
+        const paper_id = paperResult.insertId;
+
+        // Thêm các tác giả vào bảng PARTICIPATION
+        for (let i = 0; i < authors.length; i++) {
+            const author_id = authors[i];
+            const role = roles[i];
+
+            await connection.query(
+                'INSERT INTO PARTICIPATION (author_id, paper_id, role, date_added, status) VALUES (?, ?, ?, NOW(), ?)',
+                [author_id, paper_id, role, 'show']
+            );
+        }
+
+        // Commit giao dịch
+        await connection.query('COMMIT');
+        res.send('Paper added successfully!');
+    } catch (err) {
+        // Rollback giao dịch trong trường hợp lỗi
+        await connection.query('ROLLBACK');
+        console.error(err);
+        res.status(500).send('An error occurred while adding the paper.');
+    }
+}
+
+
+
 module.exports = {
-    handleLogin, getAuthurpage, getviewpaperpage, getUpdatepaperpage, PaperSearchAuthur, postUpdatepage, getSearch, getCreatePaper
+    handleLogin, getAuthurpage, getviewpaperpage, getUpdatepaperpage, PaperSearchAuthur, postUpdatepage, getSearch, getCreatePaper, postaddPaper
 }
