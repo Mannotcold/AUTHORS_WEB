@@ -87,6 +87,7 @@ const getRegisterpage = function (req, res, next) {
     // res.send('sâsffsa');
 }
 
+
 const postRegisterpage = async function (req, res, next) {
 
     let username = req.body.username;
