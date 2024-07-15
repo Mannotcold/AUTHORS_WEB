@@ -82,7 +82,6 @@ const postDeletepage = async function (req, res, next) {
     res.redirect(`/adminhome`)
 }
 
-
 const getRegisterpage = function (req, res, next) {
     res.render('register.ejs');
     // res.send('sâsffsa');
