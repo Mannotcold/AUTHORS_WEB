@@ -17,6 +17,7 @@ var LoginRouter = require('./routes/Login');
 var AdminHomeRouter = require('./routes/AdminHome');
 var AuthurHomeRouter = require('./routes/AuthurHome');
 
+
 var app = express();
 
 //config req.body
