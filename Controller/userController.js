@@ -1,5 +1,7 @@
 const connection = require('../config/database')
 const verifyToken = require('../Controller/verifyToken')
+const express = require('express');
+const session = require('express-session');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456'; 
 
@@ -21,6 +23,7 @@ let handleLogin = async (req, res) => {
     }
 
     try {
+        // Kiểm tra username có tồn tại trong cơ sở dữ liệu
         let [results, fields] = await connection.query('SELECT * FROM USERS WHERE username = ?', [username]);
         if (results.length === 0) {
             return res.status(404).json({
@@ -30,6 +33,7 @@ let handleLogin = async (req, res) => {
         }
 
         let user = results[0];
+        // So sánh mật khẩu
         if (password !== user.password) {
             return res.status(401).json({
                 errCode: 3,
@@ -37,6 +41,7 @@ let handleLogin = async (req, res) => {
             });
         }
 
+        // Tạo JWT
         let token = jwt.sign(
             {
                 userId: user.user_id,
@@ -47,13 +52,23 @@ let handleLogin = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        // Lưu token vào session (ví dụ sử dụng req.session.token)
-        req.session.token = token;
+        // Lưu token vào cookie
+        res.cookie('token', token, {
+            httpOnly: true, // Ngăn chặn truy cập từ client-side JavaScript
+            secure: false, // Đặt thành true nếu sử dụng HTTPS
+            sameSite: 'strict' // Ngăn chặn các yêu cầu từ các trang web khác
+        });
+
+        // if (user.user_type === "admin") {
+        //     return res.redirect('/adminhome');
+        // }
+        // if (user.user_type === "member") {
+        //     return res.redirect('/AuthurHome');
+        // }
 
         return res.status(200).json({
             errCode: 0,
-            message: 'Login successful!',
-            access_token: token
+            message: 'Login successful!'
         });
     } catch (err) {
         console.error(err);

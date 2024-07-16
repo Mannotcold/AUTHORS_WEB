@@ -2,16 +2,7 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456'; // Thay đổi với khóa bí mật của bạn
 
 const verifyToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    console.log("fđfàdewffffffff", req.headers['authorization']);
-    if (!authHeader) {
-        return res.status(403).json({
-            errCode: 1,
-            message: 'No token provided!'
-        });
-    }
-
-    const token = authHeader.split(' ')[1]; // Tách token từ chuỗi 'Bearer <token>'
+    const token = req.cookies.token;
 
     if (!token) {
         return res.status(403).json({
