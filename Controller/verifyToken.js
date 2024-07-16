@@ -3,7 +3,7 @@ const SECRET_KEY = '123456'; // Thay đổi với khóa bí mật của bạn
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
-
+    console.log("fđfàdewffffffff", req.headers['authorization']);
     if (!authHeader) {
         return res.status(403).json({
             errCode: 1,
@@ -34,4 +34,14 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-module.exports = verifyToken;
+const verifyRole = (role) => (req, res, next) => {
+    if (req.user.userType !== role) {
+        return res.status(403).json({
+            errCode: 3,
+            message: 'Permission denied!'
+        });
+    }
+    next();
+};
+
+module.exports = { verifyToken, verifyRole };
