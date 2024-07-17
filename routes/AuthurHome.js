@@ -7,7 +7,7 @@ const { verifyToken, verifyRole } = require('../Controller/verifyToken');
 
 // /* GET register page. */
 router.get('/', verifyToken, verifyRole('member'), getAuthurpage);
-router.get('/PaperSearchAuthur', PaperSearchAuthur);
+router.get('/PaperSearchAuthur', verifyToken, verifyRole('member', 'admin'), PaperSearchAuthur);
 router.get('/PaperSearchAuthur/SearchPaper/:id', getUpdatepaperpage);
 router.post('/PaperSearchAuthur/Update_Paper', postUpdatepage);
 

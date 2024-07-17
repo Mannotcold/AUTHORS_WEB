@@ -59,12 +59,12 @@ let handleLogin = async (req, res) => {
             sameSite: 'strict' // Ngăn chặn các yêu cầu từ các trang web khác
         });
 
-        // if (user.user_type === "admin") {
-        //     return res.redirect('/adminhome');
-        // }
-        // if (user.user_type === "member") {
-        //     return res.redirect('/AuthurHome');
-        // }
+        if (user.user_type === "admin") {
+            return res.redirect('/adminhome');
+        }
+        if (user.user_type === "member") {
+            return res.redirect('/AuthurHome');
+        }
 
         return res.status(200).json({
             errCode: 0,
@@ -82,7 +82,12 @@ let handleLogin = async (req, res) => {
 
 
 const getAuthurpage = async function (req, res, next) {
-    res.render('AuthurHome.ejs');
+    
+    res.render('AuthurHome.ejs', {
+        userId: req.user.userId,
+        username: req.user.username,
+        userType: req.user.userType
+    });
 }
 
 const getCreatePaper = async function (req, res, next) {
