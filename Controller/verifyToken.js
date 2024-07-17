@@ -21,6 +21,7 @@ const verifyToken = (req, res, next) => {
 
         // Nếu token hợp lệ, lưu thông tin người dùng vào req và chuyển sang middleware tiếp theo
         req.user = decoded;
+        console.log(decoded);
         next();
     });
 };

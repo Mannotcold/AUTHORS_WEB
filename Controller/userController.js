@@ -83,11 +83,76 @@ let handleLogin = async (req, res) => {
 
 const getAuthurpage = async function (req, res, next) {
     
-    res.render('AuthurHome.ejs', {
-        userId: req.user.userId,
-        username: req.user.username,
-        userType: req.user.userType
-    });
+    const userId = req.user.userId;
+
+    try {
+        // Lấy thông tin profile của tác giả
+        const [authorProfile] = await connection.query('SELECT * FROM AUTHORS WHERE user_id = ?', [userId]);
+
+        if (authorProfile.length === 0) {
+            return res.status(404).json({ message: 'Author not found!' });
+        }
+        console.log('frofile', authorProfile);
+        // Lấy danh sách các bài báo của tác giả
+        const papers = await connection.query(`
+            SELECT PAPERS.*, PARTICIPATION.date_added 
+            FROM PAPERS 
+            JOIN PARTICIPATION ON PAPERS.paper_id = PARTICIPATION.paper_id 
+            WHERE PARTICIPATION.author_id = ? 
+            ORDER BY PARTICIPATION.date_added DESC
+        `, [userId]);
+
+        // Chuyển hướng đến trang thông tin tác giả
+        res.render('AuthurHome.ejs', {
+            author: authorProfile[0],
+            papers: papers[0]
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error!' });
+    }
+    // res.render('AuthurHome.ejs');
+    // res.render('AuthurHome.ejs', {
+    //     userId: req.user.userId,
+    //     username: req.user.username,
+    //     userType: req.user.userType
+    // }); có thể truyền biên vào ui luôn
+}
+
+const geteditauthor = async function (req, res, next) {
+    const userId = req.params.id;
+
+    try {
+        // Lấy thông tin profile của tác giả
+        const [authorProfile] = await connection.query('SELECT * FROM AUTHORS WHERE user_id = ?', [userId]);
+
+        if (authorProfile.length === 0) {
+            return res.status(404).json({ message: 'Author not found!' });
+        }
+
+        // Chuyển hướng đến trang thông tin tác giả
+        res.render('editAuthor.ejs', {
+            author: authorProfile[0]
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error!' });
+    }
+}
+
+const postupdateAuthor = async function (req, res, next) {
+    const authorId = req.params.id;
+    const { full_name, website, bio, interests } = req.body;
+    let profileJsonText = JSON.stringify({ bio, interests: interests.split(',').map(item => item.trim()) });
+    let image_path = req.body.image_path;
+
+    if (req.file) {
+        image_path = '/uploads/' + req.file.filename; // Lưu đường dẫn ảnh mới
+    }
+    const [authorProfile] = await connection.query('UPDATE AUTHORS SET full_name = ?, website = ?, profile_json_text = ?, image_path = ? WHERE user_id = ?',
+        [full_name, website, profileJsonText, image_path, authorId]);
+
+    res.redirect('/AuthurHome');
 }
 
 const getCreatePaper = async function (req, res, next) {
@@ -197,5 +262,5 @@ const postaddPaper = async function (req, res, next) {
 
 
 module.exports = {
-    handleLogin, getAuthurpage, getviewpaperpage, getUpdatepaperpage, PaperSearchAuthur, postUpdatepage, getSearch, getCreatePaper, postaddPaper
+    handleLogin, getAuthurpage, getviewpaperpage, getUpdatepaperpage, PaperSearchAuthur, postUpdatepage, getSearch, getCreatePaper, postaddPaper, geteditauthor, postupdateAuthor
 }
