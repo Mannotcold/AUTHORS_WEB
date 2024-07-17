@@ -29,16 +29,13 @@ const upload = multer({ storage: storage });
 
 // /* GET register page. */
 router.get('/', verifyToken, verifyRole('member'), getAuthurpage);
-router.get('/PaperSearchAuthur', verifyToken, verifyRole('member', 'admin'), PaperSearchAuthur);
+router.get('/PaperSearchAuthur', PaperSearchAuthur);
 router.get('/PaperSearchAuthur/SearchPaper/:id', getUpdatepaperpage);
 router.post('/PaperSearchAuthur/Update_Paper', postUpdatepage);
 
 router.get('/CreatePaper', getCreatePaper);
 
 router.post('/CreatePaper/add', postaddPaper);
-router.get('/edit/:id', geteditauthor);
+router.get('/edit/:id', verifyToken, verifyRole('member'), geteditauthor);
 router.post('/update/:id', upload.single('profileImage'), postupdateAuthor);
-// router.get('/edit_user/:id', getedituserpage);
-
-// router.post('/Register/Create_user', getRegisterpage);
 module.exports = router;
