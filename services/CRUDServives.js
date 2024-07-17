@@ -2,8 +2,46 @@ const connection = require('../config/database')
 
 
 const getTopic = async () => {
-    let [results1, fields1] = await connection.query(`select * from PAPERS where topic_id = ?`, ["1"]);
-    let [results2, fields2] = await connection.query(`select * from PAPERS where topic_id = ?`, ["2"]);
+    let [results1, fields1] = await connection.query(`SELECT 
+    P.paper_id, 
+    P.title, 
+    P.abstract, 
+    P.author_string_list, 
+    C.name AS conference_name, 
+    T.topic_name
+FROM 
+    PAPERS P
+JOIN 
+    CONFERENCES C ON P.conference_id = C.conference_id
+JOIN 
+    TOPICS T ON P.topic_id = T.topic_id
+  JOIN 
+    PARTICIPATION PA ON P.paper_id = PA.paper_id
+WHERE 
+    P.topic_id = ?
+ORDER BY 
+    PA.date_added DESC
+LIMIT 5;`, ["1"]);
+    let [results2, fields2] = await connection.query(`SELECT 
+    P.paper_id, 
+    P.title, 
+    P.abstract, 
+    P.author_string_list, 
+    C.name AS conference_name, 
+    T.topic_name
+FROM 
+    PAPERS P
+JOIN 
+    CONFERENCES C ON P.conference_id = C.conference_id
+JOIN 
+    TOPICS T ON P.topic_id = T.topic_id
+  JOIN 
+    PARTICIPATION PA ON P.paper_id = PA.paper_id
+WHERE 
+    P.topic_id = ?
+ORDER BY 
+    PA.date_added DESC
+LIMIT 5;`, ["2"]);
 
     return { topic1: results1, topic2: results2 };
 }
