@@ -3,7 +3,7 @@ const verifyToken = require('../Controller/verifyToken')
 const express = require('express');
 const session = require('express-session');
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = '123456'; 
+const SECRET_KEY = '123456';
 
 const { getPaperbyID, updateUserbyID } = require('../services/userService')
 const { getAllPaper, searchPapers } = require('../services/CRUDServives')
@@ -82,7 +82,7 @@ let handleLogin = async (req, res) => {
 
 
 const getAuthurpage = async function (req, res, next) {
-    
+
     const userId = req.user.userId;
 
     try {
