@@ -25,8 +25,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-
-
 // /* GET register page. */
 router.get('/', verifyToken, verifyRole('member'), getAuthurpage);
 router.get('/PaperSearchAuthur', PaperSearchAuthur);
