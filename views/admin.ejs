@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+
+    <!--
+    - custom css link
+  -->
+    <link rel="stylesheet" href="/stylesheets/styleadminhome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--
+    - google font link
+  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- <script>$(document).ready(function () {
+            $(".btnDelete").click(function () {
+                const id = $(this).attr('data-id');
+                if (confirm(`Are you sure to delete this tutorial, id = $(id)`)) {
+                    $.ajax({
+                        url: `${window.location.origin}/api/tutorials/${id}`,
+                        method: "DELETE",
+                        success: (result) => {
+                            console.log(result);
+                            $(this).closest("tr").remove();
+                        },
+                        error: function (error) {
+                            console.log(">>> ajax error:", error)
+                        }
+                    });
+                } else {
+                    // Do nothing!
+                }
+            });
+        });</script> -->
+</head>
+
+<body class="light-theme">
+
+    <!-- <!- - #HEADER -> -->
+
+
+    <header>
+
+        <div class="container">
+
+            <nav class="navbar">
+
+
+                <div class="flex-wrapper">
+
+                    <ul class="desktop-nav">
+
+                        <li>
+                            <a href="/#" class="nav-link">Home</a>
+                        </li>
+                        <li>
+                            <a href="/adminhome" class="nav-link">User</a>
+                        </li>
+
+                        <li>
+                            <a href="/adminhome/Register" class="nav-link">Create User</a>
+                        </li>
+
+                        <li>
+                            <a href="/AuthurHome/PaperSearchAuthur" class="nav-link">ListPaper</a>
+                        </li>
+
+                        <li>
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <div>
+            <div class="table-wrapper">
+
+                <div class="title">
+                    <h1>List User</h1>
+                </div>
+                <table class="fl-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>username</th>
+                            <th>email</th>
+                            <th>password</th>
+                            <th>status</th>
+                            <th>user_type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div><%= JSON.stringify(listusers.length)%></div>
+
+                        <% for (let i=0; i < listusers.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= listusers[i].user_id %>
+                                </td>
+                                <td>
+                                    <%= listusers[i].username %>
+                                </td>
+                                <td>
+                                    <%= listusers[i].email %>
+                                </td>
+                                <td>
+                                    <%= listusers[i].password %>
+                                </td>
+                                <td>
+                                    <%= listusers[i].status %>
+                                </td>
+                                <td>
+                                    <%= listusers[i].user_type %>
+                                </td>
+                                <td>
+                                    <a href="/AdminHome/edit_user/<%= listusers[i].id %>" class="button1">
+                                        <button>Edit</button>
+                                    </a>
+                                    <form action="/AdminHome/delete_user/<%= listusers[i].id %>" method="post">
+                                        <button>Delete</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            <% } %>
+
+                    <tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+</body>
+
+</html>

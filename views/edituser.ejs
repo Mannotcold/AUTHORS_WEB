@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/stylelogin.css">
+
+
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="light-theme">
+    <header>
+
+        <div class="container">
+
+            <nav class="navbar">
+
+
+                <div class="flex-wrapper">
+
+                    <ul class="desktop-nav">
+
+                        <li>
+                            <a href="/adminhome" class="nav-link">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="/adminhome/Register" class="nav-link">Create User</a>
+                        </li>
+
+                        <li>
+                            <a href="#home" class="nav-link">About</a>
+                        </li>
+
+                        <li>
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+    <main>
+        <!-- <%= JSON.stringify(userEdit) %> -->
+        <form action="/AdminHome/edit_user/Update_user" method="post">
+            <div class="form-wrapper">
+                <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
+
+                <div class="form-container">
+
+                    <h2>Update user</h2>
+                    <div class="form-group d-none">
+
+                        <label for="name">ID:</label>
+                        <input type="text" value="<%= userEdit.id %>" name="userID" placeholder="Enter your name"
+                            required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+
+                        <label for="name">LoginName:</label>
+                        <input type="text" value="<%= userEdit.taikhoan %>" name="username"
+                            placeholder="Enter your name" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">password:</label>
+                        <input value="<%= userEdit.matkhau %>" name="password" placeholder="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type:</label>
+                        <input type="type" value="<%= userEdit.loaiTK %>" name="type" placeholder="type" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Register</button>
+
+                </div>
+                <a href="/" class="icon-box">
+                    <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
+                </a>
+            </div>
+        </form>
+    </main>
+
+
+
+</body>
+
+</html>

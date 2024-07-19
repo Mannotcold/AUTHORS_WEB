@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/stylesheets/stylehome.css">
+
+
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="light-theme">
+  <header>
+
+    <div class="container">
+
+      <nav class="navbar">
+
+
+        <div class="flex-wrapper">
+
+          <ul class="desktop-nav">
+
+            <li>
+              <a href="/" class="nav-link">Back Home</a>
+            </li>
+
+          </ul>
+
+          <a href="/Login" class="button1">
+            <h1>Login</h1>
+          </a>
+        </div>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+  <main-lg>
+    <div class="form-wrapper">
+      <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
+      <div class="form-container">
+
+        <h2>Login</h2>
+        <form action="/Login/api/login" method="post">
+
+          <div class="form-group">
+          
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="username" placeholder="Enter your name" required autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="password">password:</label>
+            <input type="password" id="password" name="password" placeholder="password" required>
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        <p>Don't have an account? <a class="link" href="/AdminHome/register">SignUp</a></p>
+      </div>
+      <a href="/" class="icon-box">
+        <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
+      </a>
+    </div>
+  </main>
+
+
+</body>
+
+</html>

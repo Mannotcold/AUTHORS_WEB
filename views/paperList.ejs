@@ -1,0 +1,51 @@
+<h1><%= JSON.stringify() %></h1>
+<% if (listPaper && listPaper.length> 0) { %>
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>paper_id</th>
+                <th>title</th>
+                <th>author_string_list</th>
+                <th>abstract</th>
+                <th>conference_id</th>
+                <th>topic_id</th>
+                <th>user_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% listPaper.forEach(function(paper) { %>
+                <tr>
+                    <td>
+                        <%= paper.paper_id %>
+                    </td>
+                    <td>
+                        <%= paper.title %>
+                    </td>
+                    <td>
+                        <%= paper.author_string_list %>
+                    </td>
+                    <td>
+                        <%= paper.abstract %>
+                    </td>
+                    <td>
+                        <%= paper.conference_id %>
+                    </td>
+                    <td>
+                        <%= paper.topic_id %>
+                    </td>
+                    <td>
+                        <%= paper.user_id %>
+                    </td>
+                    <td>
+                        <a href="/SearchPaper/view/<%= paper.paper_id %>" class="button1">
+                            <button>View</button>
+                        </a>
+                    
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <p>No papers found.</p>
+        <% } %>

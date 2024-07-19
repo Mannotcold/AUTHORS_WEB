@@ -1,0 +1,470 @@
+/*-----------------------------------*\ 
+  #style.css
+\*-----------------------------------*/
+
+
+/*-----------------------------------*\ 
+  #CUSTOM PROPERTY
+\*-----------------------------------*/
+
+.light-theme {
+
+    /**
+   * light theme colors 
+   */
+    --headerbackground-primary: hsl(242, 87%, 56%);
+    --background-primary: hsl(0, 0%, 100%);
+    --background-secondary: hsl(0, 0%, 97%);
+
+    --action-primary: hsl(214, 32%, 91%);
+    --action-secondary: hsl(210, 38%, 95%);
+
+    --foreground-primary: hsl(218, 23%, 23%);
+    --foreground-secondary: hsl(216, 15%, 52%);
+    --foreground-tertiary: hsl(216, 29%, 97%);
+
+    --accent: hsl(229, 76%, 66%);
+
+}
+
+
+
+:root {
+
+    /**
+   * color 
+   
+   */
+
+    --white: hsl(0, 0%, 100%);
+
+    /**
+   * typography 
+   */
+
+    --fs-base: 0.85rem;
+    --fs-1: 1.875rem;
+    --fs-2: 1.5rem;
+    --fs-3: 1.25rem;
+    --fs-4: 0.875rem;
+    --fs-5: 0.75rem;
+
+    /**
+   * spacing 
+   */
+
+    --py: 5rem;
+
+}
+
+
+
+
+
+/*-----------------------------------*\ 
+  #RESET
+\*-----------------------------------*/
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+img,
+button {
+    display: block;
+}
+
+a,
+span {
+    display: inline-block;
+}
+
+button {
+    font: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+html {
+    font-family: "Inter", sans-serif;
+    font-size: var(--fs-base);
+    /* base font-size (0.85rem = 13.6px) */
+    line-height: 1.8;
+}
+
+:focus {
+    outline-offset: 4px;
+}
+
+
+/**
+ * scrollbar style
+ */
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 20px;
+    border: 4px solid;
+}
+
+.light-theme::-webkit-scrollbar-thumb {
+    border-color: hsl(0, 0%, 90%);
+}
+
+
+.light-theme::-webkit-scrollbar-track {
+    background: hsl(0, 0%, 90%);
+}
+
+
+
+
+
+/*-----------------------------------*\ 
+  #BASE STYLE
+\*-----------------------------------*/
+
+.h1,
+.h2,
+.h3,
+.h4 {
+    display: block;
+    color: var(--foreground-primary);
+}
+
+.h1 {
+    font-size: var(--fs-1);
+    font-weight: 900;
+}
+
+.h2 {
+    font-size: var(--fs-2);
+    font-weight: 700;
+}
+
+.h3 {
+    font-size: var(--fs-3);
+    font-weight: 700;
+}
+
+.h4 {
+    font-size: var(--fs-4);
+    font-weight: 700;
+}
+
+.text-sm {
+    font-size: var(--fs-4);
+}
+
+.text-tiny {
+    font-size: var(--fs-5);
+}
+
+
+
+
+
+/*-----------------------------------*\ 
+  #REUSED STYLE
+\*-----------------------------------*/
+
+.container {
+    margin-inline: auto;
+    margin: auto;
+    /* fallback for margin-inline */
+    padding: 0 20px;
+}
+
+.btn {
+    min-width: 10rem;
+    border-radius: 100px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.6875rem 1.1875rem;
+}
+
+.btn-primary:hover {
+    background: var(--foreground-secondary);
+    color: var(--action-primary);
+}
+
+.btn-secondary {
+    background: var(--action-secondary);
+    color: var(--foreground-secondary);
+    padding: 0.5rem 1rem;
+    border: 3px solid var(--foreground-tertiary);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+}
+
+
+
+
+/*-----------------------------------*\ 
+  #HEADER
+\*-----------------------------------*/
+
+
+
+
+
+
+
+
+/**
+   * HERO 
+   */
+
+
+header {
+    background-color: var(--headerbackground-primary);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Wrapper for flexbox layout */
+.flex-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 30px;
+    /* Space between items */
+}
+
+/* Style for the desktop nav */
+.desktop-nav {
+    color: #ffffff;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    /* Center the items in the nav */
+}
+
+header .nav-link {
+    color: #ffffff;
+}
+
+
+header .button1 {
+    background-color: #0fa4ee;
+    color: white;
+    border: none;
+    padding: 0px 20px;
+    cursor: pointer;
+    font-size: 10px;
+    border-radius: 12px;
+    display: inline-block;
+    transition-duration: 0.4s;
+    margin-left: 300px;
+}
+
+header .button1:hover {
+    background-color: rgb(254, 254, 254);
+    color: black;
+    border: 2px solid #648b66;
+}
+
+
+
+h2 {
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+
+/* profile */
+
+.card {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card img.rounded-circle {
+    border-radius: 50%;
+    border: 2px solid #007bff;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.text-secondary {
+    color: #6c757d;
+}
+
+.text-muted {
+    color: #adb5bd;
+}
+
+.font-size-sm {
+    font-size: 0.875rem;
+}
+
+.btn-info {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-info:hover {
+    background-color: #0056b3;
+}
+
+.list-group {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-group-item {
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item h6 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.list-group-item p {
+    margin: 5px 0 0;
+}
+
+.list-group-item small {
+    color: #6c757d;
+}
+
+
+/* Form styling */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    box-sizing: border-box;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Additional styling */
+.text-secondary {
+    color: #6c757d;
+}
+
+.text-muted {
+    color: #adb5bd;
+}
+
+.font-size-sm {
+    font-size: 0.875rem;
+}
+
+.list-group {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-group-item {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.list-group-item h6 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.list-group-item p {
+    margin: 5px 0;
+}
+
+.list-group-item small {
+    color: #6c757d;
+}

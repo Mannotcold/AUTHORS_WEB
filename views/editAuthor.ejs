@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Author Profile</title>
+    <link rel="stylesheet" href="/stylesheets/styleAuthurHome.css">
+</head>
+
+<body class="light-theme">
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="flex-wrapper">
+                    <ul class="desktop-nav">
+                        <li><a href="/AuthurHome" class="nav-link">Profile</a></li>
+                        <li><a href="/AuthurHome/PaperSearchAuthur" class="nav-link">Papers</a></li>
+                        <li><a href="/AuthurHome/CreatePaper" class="nav-link">Create Paper</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <li><a href="" class="nav-link">Hello <%= author.full_name %></a></li>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="container">
+            <div class="main-body">
+                <div class="row gutters-sm">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><i
+                                        class="material-icons text-info mr-2">edit</i>Edit Profile</h6>
+                                <form action="/AuthurHome/update/<%= author.user_id %>" method="POST"
+                                    enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="full_name">Full Name</label>
+                                        <input type="text" class="form-control" id="full_name" name="full_name"
+                                            value="<%= author.full_name %>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="website">Website</label>
+                                        <input type="url" class="form-control" id="website" name="website"
+                                            value="<%= author.website %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bio">Bio</label>
+                                        <textarea class="form-control" id="bio" name="bio" rows="3" required><% var profile=JSON.parse(author.profile_json_text); %><%= profile.bio %></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="interests">Interests</label>
+                                        <input type="text" class="form-control" id="interests" name="interests" value=" <% var profile=JSON.parse(author.profile_json_text); %> <%= profile.interests %>" required>
+                                        <small class="form-text text-muted">Separate interests with commas.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileImage">Profile Image</label>
+                                        <input type="file" class="form-control" id="profileImage" name="profileImage">
+                                        <small class="form-text text-muted">Upload a new profile image.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image_path">Current Image Path</label>
+                                        <input type="text" class="form-control" id="image_path" name="image_path"
+                                            value="<%= author.image_path %>" readonly>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <a href="/AuthurHome" class="btn btn-secondary">Cancel</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

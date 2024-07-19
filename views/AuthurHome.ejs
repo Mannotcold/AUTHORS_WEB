@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Profile</title>
+    <link rel="stylesheet" href="/stylesheets/styleAuthurHome.css">
+</head>
+
+<body class="light-theme">
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="flex-wrapper">
+                    <ul class="desktop-nav">
+                        <li><a href="/AuthurHome" class="nav-link">Profile</a></li>
+                        <li><a href="/AuthurHome/PaperSearchAuthur" class="nav-link">Papers</a></li>
+                        <li><a href="/AuthurHome/CreatePaper" class="nav-link">Create Paper</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <li><a href="" class="nav-link">Hello <%= author.full_name %></a></li>
+                    <a href="/" class="button1">
+                        <h1>Logout</h1>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="main-body">
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src=" <%= author.image_path %>" alt="Author" class="rounded-circle" width="150">
+                                    <div class="mt-3">
+                                        <h4>
+                                            <%= author.full_name %>
+                                        </h4>
+                                        <p class="text-secondary mb-1">
+                                            <% var profile=JSON.parse(author.profile_json_text); %><%= profile.bio %>
+                                        </p>
+                                        <p class="text-muted font-size-sm">Interests: <% var profile=JSON.parse(author.profile_json_text);%><%= profile.interests %></p>
+                                        <a class="btn btn-info" href="/AuthurHome/edit/<%= author.user_id %>">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Papers</h6>
+                                <ul class="list-group">
+                                    <% papers.forEach(paper => { %>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6><%= paper.title %></h6>
+                                            <p><%= paper.abstract %></p>
+                                            <small>Published on: <%= new Date(paper.date_added).toLocaleDateString() %></small>
+                                        </div>
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update paper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/stylelogin.css">
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body class="light-theme">
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="flex-wrapper">
+                    <ul class="desktop-nav">
+                        <li><a href="/AuthurHome" class="nav-link">Profile</a></li>
+                        <li><a href="/AuthurHome/PaperSearchAuthur" class="nav-link">Papers</a></li>
+                        <li><a href="/AuthurHome/CreatePaper" class="nav-link">Create Paper</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <a href="/" class="button1">
+                        <h1>Logout</h1>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <!-- /AuthurHome/PaperSearchAuthur/Update_Paper -->
+        <form action="/AuthurHome/PaperSearchAuthur/Update_Paper" method="post">
+            <div class="form-wrapper">
+                <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
+                <div class="form-container">
+                    <h2>View paper</h2>
+                    <div class="form-group d-none">
+                        <label for="name">ID:</label>
+                        <input type="text" value="<%= topic1.paper_id %>" name="paper_id" placeholder="Enter your name"
+                            autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" value="<%= topic1.title %>" name="title" placeholder="Enter your name"
+                            required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="author_string_list">author_string_list:</label>
+                        <input type="text" value="<%= topic1.author_string_list %>" name="author_string_list"
+                            placeholder="author_string_list" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="abstract">abstract:</label>
+                        <input type="text" value="<%= topic1.abstract %>" name="abstract" placeholder="abstract"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="conference_id">conference_id:</label>
+                        <input type="text" value="<%= topic1.conference_id %>" name="conference_id"
+                            placeholder="conference_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_id">topic_id:</label>
+                        <input type="text" value="<%= topic1.topic_id %>" name="topic_id" placeholder="topic_id"
+                            required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Add you</button>
+                </div>
+                <a href="/" class="icon-box">
+                    <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
+                </a>
+            </div>
+        </form>
+
+
+
+        <div class="form-wrapper">
+            <div>
+                <h2>Current Authors</h2>
+                <ul>
+                    <% topic2.forEach(function(author) { %>
+                        <li>
+                            <%= author.full_name %>
+                                <form action="/AuthurHome/PaperSearchAuthur/RemoveAuthor" method="post" style="display:inline;">
+                                    <input type="hidden" name="author_id" value="<%= author.user_id %>">
+                                    <input type="hidden" name="paper_id" value="<%= topic1.paper_id %>">
+                                    <button type="submit">Remove</button>
+                                </form>
+                        </li>
+                        <% }); %>
+                </ul>
+            </div>
+        </div>
+        
+    </main>
+</body>
+
+</html>
